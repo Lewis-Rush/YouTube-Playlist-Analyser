@@ -1,1 +1,2 @@
 pytest
+google-api-python-client
