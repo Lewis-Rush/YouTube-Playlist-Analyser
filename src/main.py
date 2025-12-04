@@ -1,9 +1,19 @@
+import pprint
 from utils import *
 
-API_KEY = get_api_key()
+def main():
 
-youtube = build("youtube", "v3", developerKey=API_KEY)
+    API_KEY = get_api_key()
 
-playlist = get_playlist("PLW-ubDuosu7UKDXI6KF7XIMdzaStaVEIL", youtube)
+    playlist_url = input("Enter playlist URL: ")
 
-print(playlist)
+    youtube = build("youtube", "v3", developerKey=API_KEY)
+
+    playlist = get_playlist(playlist_url, youtube)
+
+    playlist_length = playlist['pageInfo']['totalResults']
+
+    print(playlist_length)
+
+
+main()

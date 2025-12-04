@@ -15,3 +15,7 @@ venv-requirements: create-environment
 
 env-setup: venv-requirements 
 	@echo "Environment ready. Use $(VENV_PYTHON) to run Python."
+
+run-tests: 
+	PYTHONPATH=$(CURDIR) pytest tests
+
