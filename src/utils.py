@@ -30,17 +30,18 @@ def extract_playlist_id(playlist_url):
     return playlist_id
 
 def get_playlist(playlist_url, youtube):
+
+    playlist_id = extract_playlist_id(playlist_url)
     
     try:
         request = youtube.playlistItems().list(
         part="snippet",
-        playlistId=f"{playlist_url}"
+        playlistId=f"{playlist_id}"
         )
 
         response = request.execute()
 
     except HttpError:
-        return "Error"
-    
-    
+        raise Exception("Error getting playlist")
+      
     return response

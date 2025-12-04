@@ -1,5 +1,7 @@
 import pytest
-from src.utils import get_api_key, extract_playlist_id
+from unittest.mock import Mock
+from googleapiclient.errors import HttpError
+from src.utils import get_api_key, extract_playlist_id, get_playlist
 
 class TestGetApiKey:
     '''
@@ -118,3 +120,43 @@ class TestExtractPlaylistID:
         assert result1 == "playlist-id"
         assert result2 == "playlist-id"
 
+class TestGetPlaylist:
+    '''
+    Class to test the get_playlist function
+    '''
+    def test_HTTP_error_raised(self):
+        '''
+        Testing that when a HTTP error is returned get_playlist raises the correct
+        error
+        '''
+        url = "https://youtube.com/list=playlist-id&not-the-id"
+
+        mock_youtube = Mock()
+        mock_request = mock_youtube.playlistItems().list.return_value
+        
+        mock_request.execute.side_effect = HttpError(
+            resp=Mock(status=400),
+            content=b"Test"
+        )
+
+        with pytest.raises(Exception) as excinfo:
+            get_playlist(url, mock_youtube)
+
+        assert "Error getting playlist" in str(excinfo.value)
+
+    def test_expected_playlist_returned(self):
+        '''
+        Testing that get_playlist returns the expected playlist
+        '''
+        url = "https://youtube.com/list=playlist-id&not-the-id"
+
+        mock_youtube = Mock()
+        mock_request = mock_youtube.playlistItems().list.return_value
+
+        expected = {"items" : [{"Video1" : "Test"}, {"Video2" : "Test"}]}
+
+        mock_request.execute.return_value = expected
+
+        result = get_playlist(url, mock_youtube)
+
+        assert result == expected
