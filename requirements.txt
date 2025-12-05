@@ -3,3 +3,4 @@ google-api-python-client
 dotenv
 black
 flake8
+coverage

@@ -31,3 +31,9 @@ run-flake8:
 run-pep8: run-black run-flake8
 	@echo "Project is pep8 compliant."
 
+run-coverage:
+	export PYTHONPATH=$(PWD)/src && \
+	coverage erase && \
+	coverage run -m pytest && \
+	coverage report -m
+
