@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock
 from googleapiclient.errors import HttpError
-from src.utils import get_api_key, extract_playlist_id, get_playlist, get_videos
+from src.utils import get_api_key, extract_playlist_id, get_playlist, get_videos, get_playlist_runtime, convert_times
 
 class TestGetApiKey:
     '''
@@ -184,3 +184,46 @@ class TestGetVideos:
         )
 
         assert result == mock_list
+
+class TestConvertTimes:
+    '''
+    Class to test the convert_times function
+    '''
+    def test_convert_times_returns_list(self):
+        '''
+        Testing that the convert_times function returns a list
+        '''
+        times = ["PT1H1M1S", "PT1H1M", "PT1S"]
+
+        result = convert_times(times)
+
+        assert type(result) == list
+
+    def test_convert_times_returns_int_list(self):
+        '''
+        Testing that the convert_times function returns a list of ints
+        '''
+        times = ["PT1H1M1S", "PT1H1M", "PT1S"]
+
+        result = convert_times(times)
+
+        for time in result:
+            assert type(time) == int
+
+    def test_time_converted_correctly(self):
+        '''
+        Testing that convert_times converts each time as expected
+        '''
+        times = ["PT1H1M1S", "PT1H1M", "PT1S", "PT4H15S", "PT250M10S"]
+
+        result = convert_times(times)
+
+        expected = [3661, 3660, 1, 14415, 15010]
+
+        assert result == expected
+
+class TestGetPlaylistRuntime:
+    '''
+    Class to test the get_playlist_runtime function
+    '''
+

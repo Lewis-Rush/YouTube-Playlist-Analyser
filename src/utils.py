@@ -1,4 +1,5 @@
 import os
+import re
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -55,8 +56,30 @@ def get_videos(video_ids, youtube):
     
     return request
 
+def convert_times(times):
+    converted_list = []
 
-def get_playlist_runtime(playlist):
-    video_ids = [item['id'] for item in playlist['items']]
+    for time in times:
+        pattern = r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?"
+        hours, minutes, seconds = re.match(pattern, time).groups()
 
-    return video_ids
+        hours = int(hours) if hours else 0
+        minutes = int(minutes) if minutes else 0
+        seconds = int(seconds) if seconds else 0
+
+        converted_list.append(hours * 3600 + minutes * 60 + seconds)
+
+    return converted_list
+
+def get_playlist_runtime(playlist, youtube):
+    video_ids = [item["snippet"]["resourceId"]["videoId"] for item in playlist["items"]]
+
+    videos = get_videos(video_ids, youtube)
+
+    videos_response = videos.execute()
+
+    playlist_times = [item["contentDetails"]["duration"]for item in videos_response["items"]]
+
+    runtime = convert_times(playlist_times)
+
+    return sum(runtime)

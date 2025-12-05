@@ -13,7 +13,7 @@ def main():
 
     playlist_length = playlist['pageInfo']['totalResults']
 
-    print(get_playlist_runtime(playlist))
+    pprint.pprint(get_playlist_runtime(playlist, youtube))
 
     print(playlist_length)
 
