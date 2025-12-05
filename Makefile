@@ -19,3 +19,7 @@ env-setup: venv-requirements
 run-tests: 
 	PYTHONPATH=$(CURDIR) pytest tests
 
+run-black:
+	black src
+	black test
+
