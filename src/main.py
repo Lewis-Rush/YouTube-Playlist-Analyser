@@ -13,6 +13,8 @@ def main():
 
     playlist_length = playlist['pageInfo']['totalResults']
 
+    print(get_playlist_runtime(playlist))
+
     print(playlist_length)
 
 

@@ -36,7 +36,8 @@ def get_playlist(playlist_url, youtube):
     try:
         request = youtube.playlistItems().list(
         part="snippet",
-        playlistId=f"{playlist_id}"
+        playlistId=f"{playlist_id}",
+        maxResults=50
         )
 
         response = request.execute()
@@ -45,3 +46,17 @@ def get_playlist(playlist_url, youtube):
         raise Exception("Error getting playlist")
       
     return response
+
+def get_videos(video_ids, youtube):
+    request = youtube.videos().list(
+        part="contentDetails",
+        id=video_ids
+    )
+    
+    return request
+
+
+def get_playlist_runtime(playlist):
+    video_ids = [item['id'] for item in playlist['items']]
+
+    return video_ids

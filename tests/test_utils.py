@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock
 from googleapiclient.errors import HttpError
-from src.utils import get_api_key, extract_playlist_id, get_playlist
+from src.utils import get_api_key, extract_playlist_id, get_playlist, get_videos
 
 class TestGetApiKey:
     '''
@@ -160,3 +160,27 @@ class TestGetPlaylist:
         result = get_playlist(url, mock_youtube)
 
         assert result == expected
+
+class TestGetVideos:
+    '''
+    Class to test the get_videos function
+    '''
+
+    def test_request_called_correctly(self):
+        '''
+        Testing that the request is called properly
+        '''
+        mock_youtube = Mock()
+        mock_videos = mock_youtube.videos.return_value
+        mock_list = mock_videos.list.return_value
+
+        video_ids = ["Test1", "Test2"]
+
+        result = get_videos(video_ids, mock_youtube)
+
+        mock_videos.list.assert_called_once_with(
+            part="contentDetails",
+            id=video_ids
+        )
+
+        assert result == mock_list
