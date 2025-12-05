@@ -23,3 +23,11 @@ run-black:
 	black src
 	black test
 
+run-flake8:
+	flake8 test/test_lambda.py test/test_utils.py src/lambda_func.py src/utils.py \
+		--max-line-length=88 \
+		--statistics
+
+run-pep8: run-black run-flake8
+	@echo "Project is pep8 compliant."
+
