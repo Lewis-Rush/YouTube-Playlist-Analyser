@@ -226,4 +226,10 @@ class TestGetPlaylistRuntime:
     '''
     Class to test the get_playlist_runtime function
     '''
+    def test_get_playlist_runtime_returns_int(self):
+        '''
+        Testing that the get_playlist_runtime function returns an int
+        '''
+        pass
+
 
