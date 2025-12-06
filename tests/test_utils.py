@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock
 from googleapiclient.errors import HttpError
-from src.utils import get_api_key, extract_playlist_id, get_playlist, get_videos, get_playlist_runtime, convert_times
+from src.utils import get_api_key, extract_playlist_id, get_playlist, get_videos, get_playlist_runtime, convert_times, get_average_video_runtime
 
 class TestGetApiKey:
     '''
@@ -236,7 +236,33 @@ class TestGetAverageVideoRuntime:
     '''
     Class to test the get_average_video_runtime function
     '''
-    def test_get_average_video_runtime_returns_time(self):
-        pass
+    def test_get_average_video_runtime_string(self):
+        '''
+        Testing that the get_average_video_runtime function returns a string
+        '''
+        runtime = 600
+        video_count = 10
 
+        result = get_average_video_runtime(runtime, video_count)
+
+        assert type(result) == str
+
+    def test_get_average_video_runtime_returns_expected(self):
+        '''
+        Testing that the get_average_video_runtime function returns the expected result
+        '''
+        runtime1 = 600
+        runtime2 = 300
+
+        video_count1 = 10
+        video_count2 = 20
+
+        result1 = get_average_video_runtime(runtime1, video_count1)
+        result2 = get_average_video_runtime(runtime2, video_count2)
+
+        expected1 = "0:01:00"
+        expected2 = "0:00:15"
+
+        assert result1 == expected1
+        assert result2 == expected2
 
