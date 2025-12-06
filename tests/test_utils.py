@@ -2,7 +2,7 @@ import pytest
 import datetime
 from unittest.mock import Mock, patch
 from googleapiclient.errors import HttpError
-from src.utils import get_api_key, extract_playlist_id, get_playlist, get_videos, get_playlist_runtime, convert_times, get_average_video_runtime, no_videos_watched
+from src.utils import get_api_key, extract_playlist_id, get_playlist, get_videos, get_playlist_runtime, convert_times, get_average_video_runtime, no_videos_watched, has_watched_videos
 
 class TestGetApiKey:
     '''
@@ -295,3 +295,31 @@ class TestNoVideosWatched:
         assert f"Total playlist runtime:  {expected_runtime_str}" in output
         assert f"Average video runtime:  {mock_average_runtime}" in output
         assert f"Playlist length:  {playlist_length}" in output
+
+class TestHasWatchedVideos:
+    '''
+    Class to test the has_watched_videos function
+    '''
+    def test_has_watched_videos_prints_correctly(self, capsys):
+        '''
+        Testing that the no_videos_watched function prints the expected values
+        '''
+        mock_youtube = Mock()
+        mock_playlist = {"items": []}
+        mock_playlist_runtime = 900
+        mock_average_runtime = 90
+        playlist_length = 5
+
+        with patch("src.utils.get_playlist_runtime", return_value=mock_playlist_runtime), \
+            patch("src.utils.get_average_video_runtime", return_value=mock_average_runtime):
+
+            has_watched_videos(mock_playlist, playlist_length, mock_youtube)
+        
+        captured = capsys.readouterr()
+        output = captured.out
+
+        expected_runtime_str = str(datetime.timedelta(seconds=mock_playlist_runtime))
+
+        assert f"Playlist time left:  {expected_runtime_str}" in output
+        assert f"Average runtime of videos left:  {mock_average_runtime}" in output
+        assert f"Videos left:  {playlist_length}" in output

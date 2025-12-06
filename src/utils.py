@@ -102,3 +102,14 @@ def no_videos_watched(playlist, playlist_length, youtube):
     print("Average video runtime: ", average_video_runtime)
 
     print("Playlist length: ", playlist_length)
+
+def has_watched_videos(playlist, playlist_length, youtube):
+    playlist_runtime = get_playlist_runtime(playlist, youtube)
+
+    average_video_runtime = get_average_video_runtime(playlist_runtime, playlist_length)
+
+    print("Playlist time left: ", str(datetime.timedelta(seconds=playlist_runtime)))
+
+    print("Average runtime of videos left: ", average_video_runtime)
+
+    print("Videos left: ", playlist_length)
