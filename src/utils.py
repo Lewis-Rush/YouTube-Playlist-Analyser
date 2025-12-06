@@ -81,9 +81,24 @@ def get_playlist_runtime(playlist, youtube):
 
     playlist_times = [item["contentDetails"]["duration"]for item in videos_response["items"]]
 
-    return sum(playlist_times)
+    converted_times = convert_times(playlist_times)
+
+    return sum(converted_times)
 
 def get_average_video_runtime(runtime, video_count):
     average_video_runtime = runtime / video_count
 
     return str(datetime.timedelta(seconds=average_video_runtime))
+
+def no_videos_watched(playlist, playlist_length, youtube):
+    playlist_runtime = get_playlist_runtime(playlist, youtube)
+
+    average_video_runtime = get_average_video_runtime(playlist_runtime, playlist_length)
+
+    print("No videos watched")
+
+    print("Total playlist runtime: ", str(datetime.timedelta(seconds=playlist_runtime)))
+
+    print("Average video runtime: ", average_video_runtime)
+
+    print("Playlist length: ", playlist_length)

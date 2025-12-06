@@ -5,21 +5,20 @@ def main():
 
     API_KEY = get_api_key()
 
+    youtube = build("youtube", "v3", developerKey=API_KEY)
+
     playlist_url = input("Enter playlist URL: ")
 
-    youtube = build("youtube", "v3", developerKey=API_KEY)
+    videos_watched = int(input("Enter amount of videos watched: \n"))
 
     playlist = get_playlist(playlist_url, youtube)
 
     playlist_length = playlist['pageInfo']['totalResults']
 
-    playlist_runtime = get_playlist_runtime(playlist, youtube)
+    if not videos_watched:
+        no_videos_watched(playlist, playlist_length, youtube)
 
-    print("Total playlist runtime: ", str(datetime.timedelta(seconds=playlist_runtime)))
-
-    print(playlist_runtime)
-
-    print(playlist_length)
-
+    else:
+        pass
 
 main()
