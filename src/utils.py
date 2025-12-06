@@ -1,5 +1,6 @@
 import os
 import re
+import datetime
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -80,6 +81,9 @@ def get_playlist_runtime(playlist, youtube):
 
     playlist_times = [item["contentDetails"]["duration"]for item in videos_response["items"]]
 
-    runtime = convert_times(playlist_times)
+    return sum(playlist_times)
 
-    return sum(runtime)
+def get_average_video_runtime(runtime, video_amount):
+    average_video_runtime = runtime / video_amount
+
+    return str(datetime.timedelta(seconds=average_video_runtime))

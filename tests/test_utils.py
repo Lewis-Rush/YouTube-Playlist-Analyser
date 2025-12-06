@@ -232,4 +232,11 @@ class TestGetPlaylistRuntime:
         '''
         pass
 
+class TestGetAverageVideoRuntime:
+    '''
+    Class to test the get_average_video_runtime function
+    '''
+    def test_get_average_video_runtime_returns_time(self):
+        pass
+
 
