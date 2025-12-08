@@ -4,3 +4,4 @@ dotenv
 black
 flake8
 coverage
+bandit

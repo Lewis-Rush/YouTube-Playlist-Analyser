@@ -1,3 +1,4 @@
 venv
 .env
 personal_docs.txt
+.coverage
