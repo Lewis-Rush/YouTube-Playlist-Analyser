@@ -40,3 +40,8 @@ run-coverage:
 	coverage run -m pytest && \
 	coverage report -m
 
+api-setup:
+	@read -p "Enter Google API key: " key; \
+	echo "API_KEY=$$key" > .env; \
+
+
