@@ -25,3 +25,5 @@ def main():
     else:
         playlist_length = playlist_length - videos_watched
         has_watched_videos(playlist, playlist_length, youtube)
+
+main()
