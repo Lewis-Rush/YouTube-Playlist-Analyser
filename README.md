@@ -27,5 +27,16 @@ This is a command line tool that uses the Google api to get information about a 
   ```
   Enter API key when prompted
 
+### Usage
+1. Run the program
+  ```bash
+  make run-analyser
+  ```
+
+2. Enter playlist URL when prompted
+
+3. Enter the number of videos watched when prompted
+
+
 ## Author
 - [@lewis-rush](https://www.github.com/lewis-rush)
