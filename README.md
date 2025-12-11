@@ -22,6 +22,10 @@ This is a command line tool that uses the Google api to get information about a 
   source venv/bin/activate
   ```
 5. Export Google API key
+  ```bash
+  make api-setup
+  ```
+  Enter API key when prompted
 
 ## Author
 - [@lewis-rush](https://www.github.com/lewis-rush)
