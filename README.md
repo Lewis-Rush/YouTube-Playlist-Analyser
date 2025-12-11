@@ -37,6 +37,15 @@ This is a command line tool that uses the Google api to get information about a 
 
 3. Enter the number of videos watched when prompted
 
+## Docs
+
+
+## Tests
+-Venv must be active
+1. Run tests
+  ```bash
+  make run-tests
+  ```
 
 ## Author
 - [@lewis-rush](https://www.github.com/lewis-rush)
