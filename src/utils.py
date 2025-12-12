@@ -193,7 +193,7 @@ def no_videos_watched(playlist, playlist_length, youtube):
     print("Playlist length: ", playlist_length)
 
 
-def has_watched_videos(playlist, playlist_length, youtube):
+def has_watched_videos(playlist, playlist_length, youtube, videos_watched):
     """
     A function for if the user has watched videos in the
     playlist
@@ -202,16 +202,26 @@ def has_watched_videos(playlist, playlist_length, youtube):
     A YouTube playlist - A dictionary of playlist videos
     The number of items in the playlist - int
     A build object for the YouTube
+    The amount of videos watched - int
 
     output:
     prints to the screen information about the playlist
     """
-    playlist_runtime = get_playlist_runtime(playlist, youtube)
+    remaining_items = playlist["items"][videos_watched:]
 
-    average_video_runtime = get_average_video_runtime(playlist_runtime, playlist_length)
+    updated_playlist = {
+        **playlist,
+        "items": remaining_items
+    }
+
+    playlist_length = len(remaining_items)
+
+    playlist_runtime = get_playlist_runtime(updated_playlist, youtube)
+    average_video_runtime = get_average_video_runtime(
+        playlist_runtime,
+        playlist_length
+    )
 
     print("Playlist time left: ", str(datetime.timedelta(seconds=playlist_runtime)))
-
     print("Average runtime of videos left: ", average_video_runtime)
-
     print("Videos left: ", playlist_length)
