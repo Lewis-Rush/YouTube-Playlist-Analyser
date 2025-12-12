@@ -305,15 +305,18 @@ class TestHasWatchedVideos:
         Testing that the no_videos_watched function prints the expected values
         '''
         mock_youtube = Mock()
-        mock_playlist = {"items": []}
+        mock_playlist = {
+        "items": [1, 2, 3, 4, 5]
+        }
         mock_playlist_runtime = 900
         mock_average_runtime = 90
+        videos_watched = 1
         playlist_length = 5
 
         with patch("src.utils.get_playlist_runtime", return_value=mock_playlist_runtime), \
             patch("src.utils.get_average_video_runtime", return_value=mock_average_runtime):
 
-            has_watched_videos(mock_playlist, playlist_length, mock_youtube)
+            has_watched_videos(mock_playlist, playlist_length, mock_youtube, videos_watched)
         
         captured = capsys.readouterr()
         output = captured.out
@@ -322,4 +325,4 @@ class TestHasWatchedVideos:
 
         assert f"Playlist time left:  {expected_runtime_str}" in output
         assert f"Average runtime of videos left:  {mock_average_runtime}" in output
-        assert f"Videos left:  {playlist_length}" in output
+        assert f"Videos left:  {playlist_length - videos_watched}" in output

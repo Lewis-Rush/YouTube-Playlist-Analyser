@@ -121,7 +121,8 @@ class TestMain:
         mock_has_watched.assert_called_once_with(
         {"pageInfo": {"totalResults": 10}},  
         9,                   
-        mock_youtube_client
+        mock_youtube_client,
+        1
         )
 
         mock_no_videos.assert_not_called()
