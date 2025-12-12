@@ -209,18 +209,12 @@ def has_watched_videos(playlist, playlist_length, youtube, videos_watched):
     """
     remaining_items = playlist["items"][videos_watched:]
 
-    updated_playlist = {
-        **playlist,
-        "items": remaining_items
-    }
+    updated_playlist = {**playlist, "items": remaining_items}
 
     playlist_length = len(remaining_items)
 
     playlist_runtime = get_playlist_runtime(updated_playlist, youtube)
-    average_video_runtime = get_average_video_runtime(
-        playlist_runtime,
-        playlist_length
-    )
+    average_video_runtime = get_average_video_runtime(playlist_runtime, playlist_length)
 
     print("Playlist time left: ", str(datetime.timedelta(seconds=playlist_runtime)))
     print("Average runtime of videos left: ", average_video_runtime)
