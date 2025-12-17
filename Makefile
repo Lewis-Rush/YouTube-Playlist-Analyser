@@ -24,7 +24,7 @@ run-black:
 	black test
 
 run-flake8:
-	flake8 test/test_lambda.py test/test_utils.py src/lambda_func.py src/utils.py \
+	flake8 test/test_main test/test_utils.py src/main.py src/utils.py \
 		--max-line-length=88 \
 		--statistics
 
