@@ -2,7 +2,6 @@ import os
 import re
 import datetime
 from dotenv import load_dotenv
-from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 load_dotenv()
@@ -46,7 +45,7 @@ def extract_playlist_id(playlist_url):
 
     list_location = playlist_url.find("list=")
 
-    playlist_id = playlist_url[(list_location + 5) :]
+    playlist_id = playlist_url[(list_location + 5):]
 
     if "&" in playlist_id:
         playlist_id = playlist_id[: playlist_id.find("&")]
@@ -65,7 +64,8 @@ def get_playlist(playlist_url, youtube):
 
     output:
     If theres an error retrieving the playlist - an error will be raised
-    If the request is successful - A dictionary of videos and information about them - dict
+    If the request is successful - A dictionary of videos and information
+    about them - dict
     """
     playlist_id = extract_playlist_id(playlist_url)
 
@@ -84,7 +84,8 @@ def get_playlist(playlist_url, youtube):
 
 def get_videos(video_ids, youtube):
     """
-    A function that will request information about a given list of videos from the YouTube api
+    A function that will request information about a given list of videos
+    from the YouTube api
 
     input:
     A list of video ids - List of strings
