@@ -17,11 +17,11 @@ env-setup: venv-requirements
 	@echo "Environment ready. Use $(VENV_PYTHON) to run Python."
 
 run-tests: 
-	PYTHONPATH=$(CURDIR) pytest tests
+	PYTHONPATH=$(CURDIR) pytest test
 
 run-black:
 	black src
-	black tests
+	black test
 
 run-flake8:
 	flake8 test/test_main test/test_utils.py src/main.py src/utils.py \
