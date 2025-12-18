@@ -1,9 +1,5 @@
 from googleapiclient.discovery import build
-from src.utils import (get_api_key, 
-                       get_playlist,  
-                       no_videos_watched, 
-                       has_watched_videos)
-
+from src.utils import get_api_key, get_playlist, no_videos_watched, has_watched_videos
 
 
 def main():

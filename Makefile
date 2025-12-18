@@ -21,7 +21,7 @@ run-tests:
 
 run-black:
 	black src
-	black test
+	black tests
 
 run-flake8:
 	flake8 test/test_main test/test_utils.py src/main.py src/utils.py \
