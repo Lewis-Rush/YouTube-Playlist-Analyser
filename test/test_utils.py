@@ -7,7 +7,6 @@ from src.utils import (
     extract_playlist_id,
     get_playlist,
     get_videos,
-    get_playlist_runtime,
     convert_times,
     get_average_video_runtime,
     no_videos_watched,
@@ -26,7 +25,7 @@ class TestGetApiKey:
         """
         api_key = get_api_key()
 
-        assert type(api_key) == str
+        assert isinstance(api_key, str)
 
     def test_returns_expected_api_key(self, monkeypatch):
         """
@@ -66,7 +65,7 @@ class TestExtractPlaylistID:
 
         result = extract_playlist_id(url)
 
-        assert type(result) == str
+        assert isinstance(result, str)
 
     def test_invalid_url_returns_error(self):
         """
@@ -213,7 +212,7 @@ class TestConvertTimes:
 
         result = convert_times(times)
 
-        assert type(result) == list
+        assert isinstance(result, list)
 
     def test_convert_times_returns_int_list(self):
         """
@@ -224,7 +223,7 @@ class TestConvertTimes:
         result = convert_times(times)
 
         for time in result:
-            assert type(time) == int
+            assert isinstance(time, int)
 
     def test_time_converted_correctly(self):
         """
@@ -265,7 +264,7 @@ class TestGetAverageVideoRuntime:
 
         result = get_average_video_runtime(runtime, video_count)
 
-        assert type(result) == str
+        assert isinstance(result, str)
 
     def test_get_average_video_runtime_returns_expected(self):
         """

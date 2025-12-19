@@ -18,11 +18,7 @@ class TestMain:
 
         with patch("src.main.get_playlist") as mock_get_playlist, patch(
             "src.main.no_videos_watched"
-        ) as mock_no_videos, patch(
-            "src.main.has_watched_videos"
-        ) as mock_has_watched, patch(
-            "src.main.build"
-        ) as mock_build:
+        ), patch("src.main.has_watched_videos"), patch("src.main.build") as mock_build:
 
             mock_get_playlist.return_value = {"pageInfo": {"totalResults": 10}}
 
@@ -47,11 +43,7 @@ class TestMain:
 
         with patch("src.main.get_playlist") as mock_get_playlist, patch(
             "src.main.no_videos_watched"
-        ) as mock_no_videos, patch(
-            "src.main.has_watched_videos"
-        ) as mock_has_watched, patch(
-            "src.main.build"
-        ) as mock_build:
+        ), patch("src.main.has_watched_videos"), patch("src.main.build") as mock_build:
 
             mock_youtube_client = Mock()
             mock_build.return_value = mock_youtube_client
