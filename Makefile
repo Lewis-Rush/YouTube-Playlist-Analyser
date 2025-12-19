@@ -45,6 +45,7 @@ api-setup:
 	echo "API_KEY=$$key" > .env; \
 
 run-analyser:
+	source venv/bin/activate \
 	python -m src.main
 
 
