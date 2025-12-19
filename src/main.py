@@ -28,4 +28,6 @@ def main():
         has_watched_videos(playlist, playlist_length, youtube, videos_watched)
 
 
-# main()
+
+if __name__ == "__main__":
+    main()
