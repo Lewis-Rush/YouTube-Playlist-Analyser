@@ -28,25 +28,19 @@ This is a command line tool that uses the Google api to get information about a 
   Enter API key when prompted
 
 ### Usage
-1. Run the program
+1. Activate venv
+  ```bash
+  source venv/bin/activate
+  ```
+
+2. Run the program
   ```bash
   make run-analyser
   ```
 
-2. Enter playlist URL when prompted
+3. Enter playlist URL when prompted
 
-3. Enter the number of videos watched when prompted
-
-## Docs
--Venv must be active
-1. Create docs
-  ```bash
-  make create-docs
-  ```
-2. View docs
-  ```bash
-  make view-docs
-  ```
+4. Enter the number of videos watched when prompted
 
 ## Tests
 -Venv must be active
