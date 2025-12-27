@@ -14,7 +14,7 @@ def main():
 
     playlist_url = input("Enter playlist URL: ")
 
-    videos_watched = int(input("Enter amount of videos watched: \n"))
+    videos_watched = int(input("Enter amount of videos watched: "))
 
     playlist = get_playlist(playlist_url, youtube)
 
